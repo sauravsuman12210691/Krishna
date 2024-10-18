@@ -1,0 +1,27 @@
+.navbar-brand img {
+    width: 70px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+nav {
+    background: rgb(4, 81, 114);
+    background: linear-gradient(90deg, rgb(6, 13, 44) 0%, rgba(46, 201, 204, 1) 48%, rgb(6, 13, 44) 99%);
+}
+
+nav .navbar-brand {
+    color: white;
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: rgb(4, 81, 114);
+    background: linear-gradient(90deg, rgb(6, 13, 44) 0%, rgba(46, 201, 204, 1) 48%, rgb(6, 13, 44) 99%);
+}

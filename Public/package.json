@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7"
+  },
+  "name": "krishna",
+  "version": "1.0.0",
+  "description": "a chat bot",
+  "main": "sever.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

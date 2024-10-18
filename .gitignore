@@ -1,0 +1,27 @@
+# Ignore Mac system files
+.DS_Store
+
+# Ignore node modules (for Node.js projects)
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore compiled files
+*.class
+*.o
+*.so
+
+# Ignore Python cache files
+__pycache__/
+
+# Ignore environment files (for Python or Node.js)
+.env
+
+# Ignore temporary files
+*.tmp
+*.swp
+
+# Ignore IDE specific files (example for JetBrains, VSCode, etc.)
+.idea/
+.vscode/

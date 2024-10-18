@@ -1,0 +1,129 @@
+.navbar-brand img {
+    width: 70px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+nav {
+    background: rgb(4, 81, 114);
+    background: linear-gradient(90deg, rgb(6, 13, 44) 0%, rgba(46, 201, 204, 1) 48%, rgb(6, 13, 44) 99%);
+}
+
+nav .navbar-brand {
+    color: white;
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: rgb(4, 81, 114);
+    background: linear-gradient(90deg, rgb(6, 13, 44) 0%, rgba(46, 201, 204, 1) 48%, rgb(6, 13, 44) 99%);
+}
+
+.dropdown-menu {
+    border: white;
+}
+
+.chat-box {
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: #0000005e 0px 0px 29px 20px;
+    height: 70vh;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(90deg, rgb(6, 13, 44) 0%, rgba(46, 201, 204, 1) 48%, rgb(6, 13, 44) 99%);   ;
+}
+
+.chat-area {
+    display: flex;
+    flex-direction: column;
+   overflow: auto;
+   
+   gap: 10px;
+    background-color: #bcabab;
+    margin: 10px 15px;
+    padding: 10px 10px;
+    border-radius: 10px;
+    
+   border: none;
+    height: 65vh;
+    width: 60vw;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+.container img{
+    position: relative;
+    left: 0px;
+    margin-left: 0px;
+    width: 100%;
+    filter:invert(1);
+}
+.container{
+  
+    display: flex;
+    justify-content: space-between;
+    
+}
+.generated-output {
+    padding: 10px 10px;
+    font-size: small;
+    width: 100%; /* Full width of the container */
+    /* height: 10vh; */
+    min-height: 10vh;
+background-color: white;
+    border: 2px solid white;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    
+}
+
+/* Add media queries to adjust for smaller devices */
+@media screen and (max-width: 768px) {
+    .generated-output {
+        width: 90%; /* Reduce width for smaller screens */
+        max-width: none; /* Remove the max-width restriction */
+        min-height: 80px; /* Adjust the minimum height */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .generated-output {
+        width: 95%; /* Narrow the width even more for very small screens */
+        min-height: 60px; /* Further reduce minimum height */
+    }
+}
+.input-group-text img{
+    height: 20px;
+}
+.user-input {
+    
+    color: white;
+    background-color: rgba(94, 94, 236, 0.691);
+    padding: 10px 10px;
+    border: 2px solid white;
+    min-height: 10vh;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    width: 100%; /* Maximum width to prevent it from stretching too far */
+    font-size: small;
+    /* height: 10vh;/ */
+    padding: 10px; /* Padding for inner content */
+    
+  
+}
+/* Automatically resize the box based on the content */
