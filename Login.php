@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['email'] = $email; // Store user's email in session
                 $_SESSION['loggedin'] = true; // Indicate that the user is logged in
 
-                // Redirect to index.html
+                // Redirect to index.php
                 header("Location: index.php");
                 exit; // Ensure no further code is executed after redirection
             } else {
@@ -60,19 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Close the database connection
 $con->close();
-
-// Display error messages if any
-if (!empty($emailErr)) {
-    echo $emailErr;
-}
-if (!empty($passwordErr)) {
-    echo $passwordErr;
-}
-if (!empty($loginErr)) {
-    echo $loginErr;
-}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -94,11 +82,13 @@ if (!empty($loginErr)) {
             background-color: #fff;
             padding: 30px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
 
         h2 {
             text-align: center;
             margin-bottom: 20px;
+            color: #333;
         }
 
         label {
@@ -110,31 +100,66 @@ if (!empty($loginErr)) {
         input[type="email"],
         input[type="password"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
+            padding: 12px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 6px;
+            font-size: 16px;
         }
 
         input[type="submit"] {
             width: 100%;
-            padding: 10px;
-            background-color: #5cb85c;
+            padding: 12px;
+            background-color: #28a745;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
         }
 
         input[type="submit"]:hover {
-            background-color: #4cae4c;
+            background-color: #218838;
+        }
+
+        .password-toggle {
+            float: right;
+            margin-top: -40px;
+            margin-right: 10px;
+            cursor: pointer;
         }
 
         .error {
             color: red;
-            margin-bottom: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
         }
+
+        .no-account {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .no-account a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .no-account a:hover {
+            text-decoration: underline;
+        }
+
+        /* Media query for responsiveness */
+        @media (max-width: 500px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -149,13 +174,26 @@ if (!empty($loginErr)) {
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" value="<?php echo $password; ?>">
+            <span class="password-toggle" onclick="togglePasswordVisibility('password')">👁️</span>
             <span class="error"><?php echo $passwordErr; ?></span>
 
             <span class="error"><?php echo $loginErr; ?></span>
 
             <input type="submit" value="Login">
         </form>
+
+        <div class="no-account">
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
     </div>
+
+    <script>
+        function togglePasswordVisibility(fieldId) {
+            const field = document.getElementById(fieldId);
+            const type = field.type === 'password' ? 'text' : 'password';
+            field.type = type;
+        }
+    </script>
 
 </body>
 </html>

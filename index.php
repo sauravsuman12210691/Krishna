@@ -56,60 +56,97 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div class="container">
         <img src="./Public/image.png" alt="">
         <div class="chat-box">
-            <div class="chat-area">
-                <span class="user-input" id='userInput' ></span>
-                <span class="generated-output" id='Gout'></span>
-            </div>
+    <div class="chat-area">
+        <span class="user-input" id="userInput"></span>
 
-            <div class="button-group">
-                <div class="input-group mb-3">
-                    <span class="input-group-text">
-                        <img id="mic-icon" src="./Public/mic.png" alt="" onclick="startVoiceRecognition()">
-                    </span>
-                    <input id="query" type="text" class="form-control" aria-label="Text input with checkbox">
-                    <span onclick="handle(); displayUserInput();" class="material-symbols-outlined input-group-text">
-                        arrow_circle_up
-                    </span>
-                </div>
-            </div>
+        <!-- Skeleton loader -->
+        <div id="skeleton-loader" class="skeleton-loader">
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-paragraph"></div>
         </div>
+
+        <!-- Generated output will appear here -->
+        <span class="generated-output" id="Gout"></span>
+    </div>
+
+    <div class="button-group">
+        <div class="input-group mb-3">
+            <span class="input-group-text">
+                <img id="mic-icon" src="./Public/mic.png" alt="" onclick="startVoiceRecognition()">
+            </span>
+            <input id="query" type="text" class="form-control" aria-label="Text input with checkbox">
+            <span onclick="handle(); displayUserInput();" class="material-symbols-outlined input-group-text">
+                arrow_circle_up
+            </span>
+        </div>
+    </div>
+</div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    async function handle() {
-        try {
-            var query = document.getElementById("query").value;
+   function displayUserInput() {
+    var query = document.getElementById("query").value;
+    var userInput = document.getElementById('userInput');
 
-            const res = await fetch("http://localhost:3000/story", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ query }) 
-            });
-
-            if (!res.ok) {
-                throw new Error("Network response was not OK");
-            }
-
-            const data = await res.json();
-
-            document.getElementById('Gout').innerHTML = `
-            <h1>${data[0].reference} </h1>
-            <br>
-            <p>${data[0].solution}</p>`;
-            console.log(data[0].solution);
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    }
-
-    function displayUserInput() {
-        var query = document.getElementById("query").value;
-        var userInput = document.getElementById('userInput');
+    if (query.trim() !== "") {
+        // Display user input
         userInput.innerHTML = `<p>${query}</p>`;
+        userInput.style.display = "block"; // Make the user input visible
     }
+}
+
+async function handle() {
+    try {
+        var query = document.getElementById("query").value;
+
+        if (query.trim() === "") {
+            return; // If the query is empty, don't proceed
+        }
+
+        // Show skeleton loader and hide Gout initially
+        document.getElementById('skeleton-loader').style.display = "block";
+        document.getElementById('Gout').style.display = "none"; // Hide output initially
+
+        const res = await fetch("http://localhost:3000/story", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ query }) 
+        });
+
+        if (!res.ok) {
+            throw new Error("Network response was not OK");
+        }
+
+        const data = await res.json();
+
+        // Hide skeleton loader
+        document.getElementById('skeleton-loader').style.display = "none";
+
+        // Display fetched data in Gout and make it visible
+        document.getElementById('Gout').innerHTML = `
+        <h1>${data[0].reference}</h1>
+        <br>
+        <p>${data[0].solution}</p>`;
+        document.getElementById('Gout').style.display = "block"; // Make the output visible
+
+    } catch (error) {
+        console.error("Error:", error);
+        
+        // Hide skeleton loader in case of an error
+        document.getElementById('skeleton-loader').style.display = "none";
+
+        // Display error message
+        document.getElementById('Gout').innerHTML = `<p>Error fetching data. Please try again later.</p>`;
+        document.getElementById('Gout').style.display = "block"; // Show the error message
+    }
+}
+
+
+
+    
 
     // Voice recognition logic
     function startVoiceRecognition() {
